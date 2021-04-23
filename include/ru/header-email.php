@@ -1,0 +1,1 @@
+<span class="email">gipermed@gipermed.ru</span>

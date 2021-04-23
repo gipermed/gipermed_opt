@@ -1,0 +1,7 @@
+.filter-box__container_modef {
+	display: none;
+}
+
+.category-filter-sections ul li::marker, .category-sort ul li::marker {
+	content:none;
+}

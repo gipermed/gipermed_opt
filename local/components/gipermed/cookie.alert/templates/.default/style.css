@@ -1,0 +1,7 @@
+.cookalert {padding: 15px 20px; font-size: 12px; background: #999; margin: 0 auto; font-weight: bold; color: #fff;}
+.cookalert__msg {text-align: center;}
+.cookalert__inner {width: 100%; background: #999;}
+
+.cookalert__confirm-wrap {text-align: center; margin-top: 10px; color: #fff}
+.cookalert__btn {background: #59B659; padding: 5px; border-radius: 5px; display: inline-block; color: #fff}
+.cookalert__politic {padding: 5px; text-decoration: underline; display: inline-block; color: #fff}

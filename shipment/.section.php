@@ -1,0 +1,6 @@
+<?
+$sSectionName = "Отгрузка";
+$arDirProperties = Array(
+
+);
+?>

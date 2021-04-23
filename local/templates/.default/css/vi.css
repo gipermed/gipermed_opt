@@ -1,0 +1,319 @@
+.bottomLineOfMenu {
+	position: absolute;
+	height: 4px;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAFUlEQVR4AWNgYGA0BhHyIEIARLACAAUkAGzX7XSlAAAAAElFTkSuQmCC) repeat-x;
+	width: 100%;
+	top: 34px;
+	min-width: 1015px
+}
+
+.header-zero-floor {
+	height: 30px;
+	position: relative;
+	font-size: 12px;
+}
+
+.header-zero-floor .region {
+	float: left;
+	width: 210px;
+	margin-top: 4px
+}
+
+.header-zero-floor .region .iconRegion {
+	margin-top: 2px;
+	margin-left: -2px;
+	width: 16px;
+	height: 22px;
+	background: url(../img/vi/icons.png) 0 0 no-repeat;
+}
+
+.header-zero-floor .myShop {
+	float: left;
+	width: 200px;
+	margin-top: 4px
+}
+
+.header-zero-floor .myShop .iconShop {
+	top: 11px;
+	width: 18px;
+	height: 22px;
+	flex: 0 0 18px;
+	margin-top: 1px;
+	background: url(../img/vi/icons.png) 0 -21px no-repeat
+}
+
+.header-zero-floor .myShop-address {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center
+}
+
+.header-zero-floor .selectMagazinTop {
+	position: relative;
+	display: inherit;
+	width: calc(100% - 22px);
+	white-space: nowrap;
+	overflow: hidden
+}
+
+.header-zero-floor .selectMagazinTop:after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	right: 0;
+	display: block;
+	height: 22px;
+	width: 32px;
+	background: -moz-linear-gradient(left,hsla(0,0%,100%,0) 0,#fff 70%);
+	background: -webkit-linear-gradient(left,hsla(0,0%,100%,0),#fff 70%);
+	background: linear-gradient(90deg,hsla(0,0%,100%,0) 0,#fff 70%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ffffff",endColorstr="#ffffff",GradientType=1)
+}
+
+.header-zero-floor .menu {
+	float: right
+}
+
+.header-zero-floor .menu ul {
+	list-style: none;
+	margin-top: 8px
+}
+
+.header-zero-floor .menu ul>li {
+	float: left;
+	position: relative;
+	margin-left: 3px;
+	-moz-margin-start: 2px
+}
+
+.header-zero-floor .menu ul>li>a {
+	z-index: 2;
+	margin: 0 10px 10px;
+	display: block
+}
+
+.header-zero-floor .menu ul>li:last-child>a {
+	padding-right: 0!important;
+	margin-right: 0!important
+}
+
+.header-zero-floor .menu ul>li.withChilds>a {
+	background: url("../img/vi/menu_arrow.png") no-repeat scroll 100% 5px transparent;
+	padding-right: 13px;
+	text-decoration: none;
+	position: relative;
+	z-index: 100
+}
+
+
+
+.redArrowDown>a{
+	color: #d60000
+}
+
+.redArrowDown>ul>li {
+	margin: 8px 10px!important
+}
+
+.header-zero-floor .menu ul>li.topMenuB2B>a span {
+	color: #d60000;
+	border-bottom: 1px dotted #d60000
+}
+
+.header-zero-floor .menu ul>li.topMenuB2B>a {
+	color: #d60000;
+	margin-right: 17px;
+	margin-left: 18px
+}
+
+.header-zero-floor .menu ul>li.withChilds:hover>ul {
+	display: block;
+	width: auto;
+	min-width: 96px
+}
+
+.header-zero-floor .menu ul>li>ul {
+	display: none;
+	position: absolute;
+	padding-left: 0;
+	background: #fff;
+	-moz-border-radius: 0 8px 8px 8px;
+	border-radius: 0 8px 8px 8px;
+	-moz-box-shadow: 0 0 3px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 0 3px rgba(0,0,0,.5);
+	box-shadow: 0 0 3px rgba(0,0,0,.5);
+	z-index: 1;
+	margin-top: -5px
+}
+
+.header-zero-floor .menu ul>li>ul>li {
+	display: block;
+	float: none;
+	margin: 8px 15px
+}
+
+.header-zero-floor .menu ul>li>ul>li>a {
+	margin: 0;
+	white-space: nowrap;
+	text-decoration: none
+}
+
+.header-zero-floor .menu ul>li>ul>li>a:hover {
+	text-decoration: underline;
+	color: #1280bc
+}
+
+.header-zero-floor .menu ul>li>ul>li:first-child {
+	padding-top: 6px
+}
+
+.header-zero-floor .menu ul>li>ul>li:last-child {
+	padding-bottom: 6px
+}
+
+.header-zero-floor .menu ul>li.withChilds:hover:after {
+	-moz-box-shadow: 0 0 3px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 0 3px rgba(0,0,0,.5);
+	box-shadow: 0 0 3px rgba(0,0,0,.5);
+	height: 30px;
+	margin-top: -30px;
+	width: 100%;
+	display: block;
+	background: #fff;
+	position: absolute;
+	content: "";
+	border-radius: 8px;
+	z-index: 1
+}
+
+.header-zero-floor .menu ul>li.withChilds:hover:before {
+	height: 15px;
+	background: #fff;
+	width: 100%;
+	display: block;
+	position: absolute;
+	margin-top: 15px;
+	content: "";
+	z-index: 5
+}
+
+
+
+@media (max-width: 992px) {
+	.bottomLineOfMenu, .header-zero-floor { display:none }
+	.header-stock { display:none }
+}
+
+
+
+
+.header-stock {
+	cursor: pointer;
+	position: relative;
+	float: right;
+	margin: 13px 0 0 13px;
+}
+
+.header-stock__icon {
+	background: url("../img/vi/icons.png") no-repeat scroll 0 -67px transparent;
+	height: 20px;
+	width: 20px
+}
+
+.header-stock__text-wrap {
+	background: url("../img/vi/menu_arrow.png") no-repeat scroll 100% 5px transparent;
+	padding-right: 13px;
+	line-height: 15px;
+}
+
+.header-stock__text {
+	color: #F01616;
+}
+
+.header-stock:hover .header-stock__text {
+	color: #d60000;
+	border-bottom: 1px dotted;
+}
+
+.header-stock:hover .header-stock__menu-wrap {
+	display: block;
+}
+
+.header-stock__menu-wrap {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -60px;
+	width: 120px;
+	z-index: 9999;
+}
+
+.header-stock__menu {
+	position:relative;
+	background: #fff;
+	border: 2px solid #C7C7C7;
+	border-radius: 10px;
+	margin-top: 10px;
+	padding: 10px 10px 10px 30px;
+}
+
+.header-stock__menu:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -10px;
+	border: 10px solid transparent;
+	width: 20px;
+	height: 20px;
+	border-bottom: 10px solid #fff;
+}
+
+
+
+.header-stock__menu-item {
+	display: block;
+	position: relative;
+	font: 13px/16px "Arial", sans-serif;
+	color: #ef1b19;
+	text-decoration: underline;
+	margin-bottom: 5px;
+}
+
+.header-stock__menu-item--sale:before {
+	content: '';
+	background: url(../img/sale-14x15.svg) 0 0 no-repeat;
+	background-size: 14px 15px;
+	width: 14px;
+	height: 15px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -20px;
+}
+
+.header-stock__menu-item--action:before {
+	content: '';
+	background: url(../img/action-15x15.svg) 0 0 no-repeat;
+	background-size: 15px 15px;
+	width: 15px;
+	height: 15px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -20px;
+}
+
+.header-stock__menu-item--markdown:before {
+	content: '';
+	background: url(../img/markdown-12x13.svg) 0 0 no-repeat;
+	background-size: 13px 12px;
+	width: 13px;
+	height: 12px;
+	display: block;
+	position: absolute;
+	top: 1px;
+	left: -19px;
+}

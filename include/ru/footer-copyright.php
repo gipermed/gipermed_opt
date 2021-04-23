@@ -1,0 +1,1 @@
+<span class="copyright">© 2014 — <?= date('Y') ?>. Gipermed.ru</span> <span class="email">Эл.почта: <a href="mailto:info@Gipermed.ru">info@Gipermed.ru</a></span>&nbsp;

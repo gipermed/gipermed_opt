@@ -1,0 +1,53 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Миссия",
+		"/about/",
+		Array(),
+		Array(),
+		""
+	),
+	/*Array(
+		"История",
+		"#",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Вакансии",
+		"#",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Награды",
+		"#",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Реквизиты",
+		"#",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Благотворительность",
+		"#",
+		Array(),
+		Array(),
+		""
+	),*/
+	Array(
+		"Бренды",
+		"/manufacturers/",
+		Array(),
+		Array(),
+		""
+	)
+);
+?>
