@@ -33,8 +33,11 @@
 		$singleSizing = true;
 		$defBoxing = $arSingleBoxing;
 	}
+	
 
 	$freeDelivery = $arResult["PROPERTIES"]["MOSCOW_FREE_DELIVERY"]["VALUE"] ? "data-free-delivery='y'" : "";?>
+
+
 <div class="product-head">
 	<div class="product-head-title">
 		<h1 class="page-title product-title"><?=$arResult["NAME"]?></h1>
@@ -94,6 +97,11 @@
 			</div>
 			<svg width="24" height="24" class="zoom-icon"><use xlink:href="#icon-zoom"/></svg>
 		</div>
+	  <?php if($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']): ?>
+		<div class="product-gallery__discount-sticker">
+			<span>Уточните скидку у менеджера</span>
+		</div>
+	  <?php endif;?>	
 	</div>
 
 	<div class="product-body">
