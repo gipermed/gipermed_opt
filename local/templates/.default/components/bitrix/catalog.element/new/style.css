@@ -1,22 +1,67 @@
 .product-gallery {
 	display: relative;
 }
-.product-gallery__discount-sticker {
+.product-gallery__sticker-container {
+
+}
+.product-gallery__sticker {
 	position: absolute;
 	width: 129px;
 	height: 40px;
-	border-radius: 3px;
-	background: linear-gradient(111.96deg, #B721FF 0%, #21D4FD 100%);
 	z-index: 2;
 	top: 20px;
 	left: 25%;
+}
+.product-gallery__sticker span { 
+	color: white;
+	border-radius: 3px;
+}
+
+.discount {
+	background: linear-gradient(111.96deg, #B721FF 0%, #21D4FD 100%);
+	padding: 5px 10px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+.hide-sticker {
+	display: none;
+}
+.sale {
+	display: flex;
+	justify-content: center;
+
+}
+.sale span:nth-child(1) {
+	background: linear-gradient(90deg,#ff5858 0%,#f09819 100%);
+	font-size: 21px;
+	margin-right: 10px;
+	padding: 5px 15px;
+}
+.sale span:nth-child(2) {
+    font-size: 22px;
+    background: -webkit-gradient(linear,left top, right top,from(#f83600),to(#f9d423));
+    background: -webkit-linear-gradient(left,#f83600 0%,#f9d423 100%);
+    background: -o-linear-gradient(left,#f83600 0%,#f9d423 100%);
+    background: linear-gradient(90deg,#f83600 0%,#f9d423 100%);
+    color: #0b2349;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+	padding: 5px;
+}
+
+.new {
+	display: flex;
+	justify-content: center;
+}
+.new span {
+	background: linear-gradient(90deg,#2af598 0%,#009efd 100%);
+	font-size: 22px;
 	padding: 5px 10px;
 }
-.product-gallery__discount-sticker span {
-	color: white;
-}
+
 @media (max-width: 480px) {
-	.product-gallery__discount-sticker {
+	.product-gallery__sticker {
 		top: 5px;
 		left: 10px;
 	}

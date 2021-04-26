@@ -37,6 +37,35 @@
 
 	$freeDelivery = $arResult["PROPERTIES"]["MOSCOW_FREE_DELIVERY"]["VALUE"] ? "data-free-delivery='y'" : "";?>
 
+<!-- очередность вывода:
+1. Новинки
+2. Со скидкой
+3. Уточнить скидку у менеджера
+4. Ни чего не выводим
+ -->
+<?php
+
+$sticker = [];
+
+ if($arResult['PROPERTIES']['NEW']['VALUE']) {
+	$sticker['class'] = 'new';
+	$sticker['name']  = 'Новинка';
+ } elseif($arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE']) {
+	$newPrice =  $arResult['PROPERTIES']['PRICE_WHOLESALE']['VALUE'];
+	$oldPrice =  $arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE'];
+	$discount = floor((1 - $newPrice / $oldPrice)* 100);
+	$sticker['class'] 	 = 'sale';
+	$sticker['name'] 	 = 'Скидка';
+	$sticker['discount'] = $discount; 
+ } elseif ($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']) {
+	$sticker['class'] = 'discount';
+	$sticker['name']  = 'Уточните скидку у менеджера';	 
+ } else {
+	$sticker['class'] = 'hide-sticker';
+	$sticker['name']  = '';	
+ }
+
+?>
 
 <div class="product-head">
 	<div class="product-head-title">
@@ -97,11 +126,15 @@
 			</div>
 			<svg width="24" height="24" class="zoom-icon"><use xlink:href="#icon-zoom"/></svg>
 		</div>
-	  <?php if($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']): ?>
-		<div class="product-gallery__discount-sticker">
-			<span>Уточните скидку у менеджера</span>
+	  <?php //if($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']): ?>
+		<div class="product-gallery__sticker-container"></div>
+		<div class="product-gallery__sticker <?=$sticker['class']?>">
+			<span><?=$sticker['name']?></span> 
+			 <?php if(isset($sticker['discount'])): ?>
+				<span><?=$sticker['discount']?>%</span>
+			 <?php endif; ?>	
 		</div>
-	  <?php endif;?>	
+	  <?php// endif;?>	
 	</div>
 
 	<div class="product-body">
