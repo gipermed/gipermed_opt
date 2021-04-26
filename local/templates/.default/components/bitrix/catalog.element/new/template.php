@@ -37,31 +37,7 @@
 
 	$freeDelivery = $arResult["PROPERTIES"]["MOSCOW_FREE_DELIVERY"]["VALUE"] ? "data-free-delivery='y'" : "";?>
 
-	<style>
-	.product-gallery {
-		display: relative;
-	}
-	.product-gallery__discount-sticker {
-		position: absolute;
-		width: 129px;
-		height: 40px;
-		border-radius: 3px;
-		background: linear-gradient(111.96deg, #B721FF 0%, #21D4FD 100%);
-		z-index: 2;
-		top: 20px;
-		left: 25%;
-		padding: 5px 10px;
-	}
-	.product-gallery__discount-sticker span {
-		color: white;
-	}
-	@media (max-width: 480px) {
-		.product-gallery__discount-sticker {
-			top: 5px;
-			left: 10px;
-		}
-	}
-	</style>
+
 <div class="product-head">
 	<div class="product-head-title">
 		<h1 class="page-title product-title"><?=$arResult["NAME"]?></h1>
