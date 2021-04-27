@@ -1,18 +1,17 @@
 <?
 
-$newPrice = floatval($arResult["PROPERTIES"]["PRICE_WHOLESALE"]["VALUE"]);
+$newPrice = $arResult['PROPERTIES']['PRICE_WHOLESALE']['VALUE'];
 if ( $newPrice ) {
 	$arResult["PRICES"]["NEW"] = \CCurrencyLang::CurrencyFormat( $newPrice, "RUB" );
 
-	$oldPrice = floatval($arResult["PROPERTIES"]["PRICE_WHOLESALE_OLD"]["VALUE"]);
+	$oldPrice = $arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE'];
 	if ( $oldPrice && $newPrice < $oldPrice ) {
-		$arResult["PRICES"]["OLD"] = \CCurrencyLang::CurrencyFormat( $oldPrice, "RUB" );
-		$arResult["PRICES"]["DISCOUNT"] = intval( 100 - 100 * $newPrice / $oldPrice ) * (-1);
+		$arResult["PRICES"]["OLD"] = \CCurrencyLang::CurrencyFormat(  $arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE'], "RUB" );
+		$arResult["PRICES"]["DISCOUNT"] = floor((1 - $newPrice / $oldPrice)* 100);
 	}
 }
 
-
-
+   
 $expPrice = $arResult["PROPERTIES"]["EXP_PRICE"]["VALUE"];
 $expDate = strtotime( $arResult["PROPERTIES"]["EXP_DATE"]["VALUE"] );
 
@@ -25,5 +24,3 @@ if ( $expPrice && $expDate && $expDate >= time() ) {
 $urls = getCatalogProductUrl($arResult["ID"]);
 $arResult["DETAIL_PAGE_URL"] = $urls["curr"];
 $arResult["ALT_PAGE_URL"] = $urls["alt"];
-
-

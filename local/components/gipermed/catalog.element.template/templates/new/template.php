@@ -5,15 +5,28 @@
 
 ?>
 
-<?$arPrice = $arResult["PRICES"]?>
+<?
+	$arPrice = $arResult["PRICES"];
+
+	if($arResult['PROPERTIES']['NEW']['VALUE']) {
+		$exclusiv = 'new';
+	 } elseif($arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE']) {
+		$exclusiv = 'sale'; 
+	 } elseif ($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']) {
+		$exclusiv = 'discount'; 
+	 } else {
+		$exclusiv = ''; 
+	 }
+
+?>
+
+
+
 <?$qty = $arResult["PRODUCT"]["QUANTITY"]?>
+
 <a href="<?=$arResult["DETAIL_PAGE_URL"]?>" class="product-item-link" aria-label="На страницу товара"></a>
-<?if ( $qty && $arPrice["OLD"] && $arPrice["DISCOUNT"] ):?>	
-	<div class="product-item-stikers">
-		<div class="product-item-stiker product-item-stiker-sale">Скидка</div>
-	</div>
-	<div class="product-item-sale"><?=$arPrice["DISCOUNT"]?>%</div>
-	<?endif?>
+
+
 <div class="product-item-img">
 	<img data-src="<?=$arResult["DETAIL_PICTURE"]['SRC']?>" alt="<?=$arResult["NAME"]?>" src="<?= !empty($arResult["DETAIL_PICTURE"]['SRC']) ? $arResult["DETAIL_PICTURE"]['SRC'] : $arResult["PREVIEW_PICTURE"]['SRC'] ?>">
 </div>
@@ -39,3 +52,31 @@
 		</div>
 	</div>
 </div>
+<?php
+		if(isset($arPrice["DISCOUNT"]) && $exclusiv == 'sale'):
+			?>
+			<div class="product__badge product__badge--sale">
+			  <p class="product__badge-name">Скидка</p>
+			  <p class="product__badge-count"><?=$arPrice["DISCOUNT"]?>%</p>
+			</div>
+			<?php
+				endif;
+			?>
+			<?php
+				if($exclusiv == 'new'):
+			?>
+				<div class="product__badge product__badge--new">
+				  <p class="product__badge-name">Новинка</p>
+				</div>
+			<?php
+				endif;
+			?>
+				<?php
+				if($exclusiv == 'discount'):
+			?>
+				<div class="product__badge product__badge--discount">
+				  <p class="product__badge-name">Уточните скидку у менеджера</p>
+				</div>
+			<?php
+				endif;
+			?>

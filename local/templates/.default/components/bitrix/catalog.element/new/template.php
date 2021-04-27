@@ -53,10 +53,12 @@ $sticker = [];
  } elseif($arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE']) {
 	$newPrice =  $arResult['PROPERTIES']['PRICE_WHOLESALE']['VALUE'];
 	$oldPrice =  $arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE'];
-	$discount = floor((1 - $newPrice / $oldPrice)* 100);
-	$sticker['class'] 	 = 'sale';
-	$sticker['name'] 	 = 'Скидка';
-	$sticker['discount'] = $discount; 
+	if( $oldPrice && $newPrice < $oldPrice ) {
+		$discount = floor((1 - $newPrice / $oldPrice)* 100);
+		$sticker['class'] 	 = 'sale';
+		$sticker['name'] 	 = 'Скидка';
+		$sticker['discount'] = $discount; 	
+	}
  } elseif ($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']) {
 	$sticker['class'] = 'discount';
 	$sticker['name']  = 'Уточните скидку у менеджера';	 
@@ -105,12 +107,6 @@ $sticker = [];
 		<div class="product-gallery-main zoom-link">
 			<?$arPrice = $arResult["PRICES"]?>
 			<?$qty = $arResult["PRODUCT"]["QUANTITY"]?>
-			<?if ( $qty && $arPrice["OLD"] && $arPrice["DISCOUNT"] ):?>	
-				<div class="product-item-stikers">
-					<div class="product-item-stiker product-item-stiker-sale">Скидка</div>
-				</div>
-				<div class="product-item-sale"><?=$arPrice["DISCOUNT"]?>%</div>
-				<?endif;?>
 			<div class="product-gallery-slider swiper-container">
 				<div class="swiper-wrapper">
 					<?if (is_array($arResult[ "IMG" ])):?>
