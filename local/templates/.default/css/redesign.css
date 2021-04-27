@@ -364,3 +364,22 @@ html .fancybox-container {
 	transform: translateZ(0);
 }
 html, body {height: 100%;}
+
+.product__badge--discount{
+	background: linear-gradient(111.96deg, #B721FF 0%, #21D4FD 100%);
+    padding: 3px 10px;
+    border-radius: 3px;
+	width: 129px;
+    height: 40px;
+}
+.product__badge--discount p{ 
+	font-size: 11px;
+    line-height: 12px;
+}
+
+@media (max-width: 767px) {
+	.product__badge--discount{
+		top: 0;
+		left: 0;
+	}
+  }

@@ -8,16 +8,16 @@ $actualPrice = $price = $arItem["ITEM_PRICES"][0]["PRINT_PRICE"]
 	$arPrice = $arResult["PRICES"];
 	$country = reset($arResult[ "COUNTRIES" ]);
 
-	$filter = $GLOBALS[ "arrFilter" ];
-
-	$exclusiv = '';
-
-	if(isset($filter[0][0]['!PROPERTY_SALE']) && $filter[0][0]['!PROPERTY_SALE'] == false) {
-		$exclusiv = 'sale'; 
-	}
-	if(isset($filter['!PROPERTY_NEW']) && $filter['!PROPERTY_NEW'] == false) {
+	if($arResult['PROPERTIES']['NEW']['VALUE']) {
 		$exclusiv = 'new';
-	}
+	 } elseif($arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE']) {
+		$exclusiv = 'sale'; 
+	 } elseif ($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']) {
+		$exclusiv = 'discount'; 
+	 } else {
+		$exclusiv = ''; 
+	 }
+
 ?>
 
 
@@ -55,6 +55,15 @@ $actualPrice = $price = $arItem["ITEM_PRICES"][0]["PRINT_PRICE"]
 	?>
 		<div class="product__badge product__badge--new">
 		  <p class="product__badge-name">Новинка</p>
+		</div>
+	<?php
+		endif;
+	?>
+		<?php
+		if($exclusiv == 'discount'):
+	?>
+		<div class="product__badge product__badge--discount">
+		  <p class="product__badge-name">Уточните скидку у менеджера</p>
 		</div>
 	<?php
 		endif;
