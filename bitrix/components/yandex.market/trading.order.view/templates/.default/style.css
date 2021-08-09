@@ -1,3 +1,64 @@
+/* common */
+
+.yamarket-copy-icon,
+.yamarket-save-icon,
+.yamarket-edit-icon {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    border: 0;
+    box-sizing: content-box;
+	position: relative;
+	top: -1px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+    background: url(/bitrix/images/yandex.market/copy.svg) no-repeat 50% 50%;
+    background-size: 14px 14px;
+    opacity: 0.75;
+    white-space: nowrap;
+    text-indent: 30px;
+    cursor: pointer;
+}
+
+.yamarket-save-icon {
+	top: -2px;
+    background-image: url(/bitrix/images/yandex.market/save.svg);
+	background-size: 16px 16px;
+}
+
+.yamarket-edit-icon {
+	top: -2px;
+    background-image: url(/bitrix/images/yandex.market/settings.svg);
+	background-size: 16px 16px;
+}
+
+.yamarket-transparent-btn {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: visible;
+	padding: 0;
+	border: 0;
+
+	margin: 0;
+
+	background: transparent;
+	color: #717373;
+}
+
+.yamarket-transparent-btn__reveal {
+	opacity: 0;
+	transition: opacity .15s ease-in;
+}
+
+.yamarket-transparent-btn:hover .yamarket-transparent-btn__reveal,
+.yamarket-transparent-btn:focus .yamarket-transparent-btn__reveal {
+	opacity: 1;
+	transition-timing-function: ease-out;
+}
+
 /* basket */
 
 .yamarket-basket-table thead td {
@@ -48,6 +109,72 @@
 
 .yamarket-basket-box-add.adm-btn-disabled:before {
 	opacity: 0.5 !important;
+}
+
+/* cis */
+
+.yamarket-cis-summary,
+a.yamarket-cis-summary,
+a.yamarket-cis-summary:link {
+    text-decoration: none;
+}
+
+.yamarket-cis-summary:hover,
+a.yamarket-cis-summary:hover {
+    text-decoration: underline;
+}
+
+.yamarket-cis-summary.is--disabled,
+a.yamarket-cis-summary.is--disabled {
+    text-decoration: none;
+}
+
+.yamarket-cis-summary[data-status="EMPTY"],
+a.yamarket-cis-summary[data-status="EMPTY"] {
+    color: inherit;
+}
+
+.yamarket-cis-summary[data-status="WAIT"],
+a.yamarket-cis-summary[data-status="WAIT"] {
+    color: red;
+}
+
+.yamarket-cis-summary[data-status="READY"],
+a.yamarket-cis-summary[data-status="READY"] {
+    color: green;
+}
+
+.yamarket-cis-modal__title {
+    margin: 0 0 10px;
+
+    font-size: 1em;
+    line-height: 1.28;
+    font-weight: normal;
+}
+
+.yamarket-cis-table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.yamarket-cis-table__number {
+    padding: 5px 5px 5px 0;
+
+    white-space: nowrap;
+}
+
+.yamarket-cis-table__control {
+    width: 100%;
+    padding: 5px 0;
+    box-sizing: border-box;
+}
+
+.yamarket-cis-table__input {
+    max-width: 100%;
+}
+
+.yamarket-cis-table__actions {
+    padding-top: 10px;
 }
 
 /* shipment */
@@ -189,6 +316,23 @@
 	padding: 10px !important;
 }
 
+.yamarket-box-pack-select {
+	margin-bottom: 10px;
+}
+
+.yamarket-box-pack-select__origin {
+    display: inline-block;
+    vertical-align: middle;
+	max-width: 220px;
+}
+
+.yamarket-box-pack-select__save {
+    display: inline-block;
+    vertical-align: middle;
+
+    margin-left: 5px;
+}
+
 .yamarket-box-sizes {
 	display: block;
 	margin-left: -20px;
@@ -228,11 +372,17 @@
 	font-weight: bold;
 }
 
-.yamarket-shipment-submit__result[data-status="ok"] {
+.yamarket-shipment-submit__result-row {
+    display: block;
+}
+
+.yamarket-shipment-submit__result[data-status="ok"],
+.yamarket-shipment-submit__result-row[data-status="ok"] {
 	color: green;
 }
 
-.yamarket-shipment-submit__result[data-status="error"] {
+.yamarket-shipment-submit__result[data-status="error"],
+.yamarket-shipment-submit__result-row[data-status="error"] {
 	color: red;
 }
 

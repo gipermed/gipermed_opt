@@ -1,13 +1,5 @@
 <?php
 $arUrlRewrite=array (
-  10 => 
-  array (
-    'CONDITION' => '#^/catalog/([^/]+?)/filter/(.+?)/apply/\\??(.*)#',
-    'RULE' => 'SECTION_CODE=$1&SMART_FILTER_PATH=$2&$3',
-    'ID' => 'bitrix:catalog.smart.filter',
-    'PATH' => '/catalog/section.php',
-    'SORT' => 100,
-  ),
   1 => 
   array (
     'CONDITION' => '#^/catalog/(similar|related)/(\\d+)/(\\?.*)?$#',

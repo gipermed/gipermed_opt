@@ -2,10 +2,12 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) { die(); }
 
 use Bitrix\Main;
+use Yandex\Market;
 
 /** @var Yandex\Market\Components\AdminGridList $component */
 
-$APPLICATION->SetAdditionalCSS('/bitrix/css/yandex.market/admin.css');
+Market\Ui\Assets::loadPlugin('admin', 'css');
+Market\Ui\Assets::loadPlugin('lib.dialog');
 
 $adminList = $component->getViewList();
 

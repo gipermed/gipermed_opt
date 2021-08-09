@@ -8,3 +8,4 @@ $this->IncludeLangFile('template.php');
 include __DIR__ . '/modifier/box-dimensions-format.php';
 include __DIR__ . '/modifier/box-properties.php';
 include __DIR__ . '/modifier/box-property-values.php';
+include __DIR__ . '/modifier/basket-cis.php';

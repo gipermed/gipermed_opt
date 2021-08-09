@@ -831,7 +831,6 @@ BX.Iblock.SmartFilter = (function()
 $(document).ready(function () {
 $('.range-slider').each(function () {
   var slider = $(this);
-  console.log(slider);
   var wrapp = slider.closest('.range-slider-wrapp');
   var inputFrom = wrapp.find('.range-input-from');
   var inputTo = wrapp.find('.range-input-to');

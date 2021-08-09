@@ -10,12 +10,13 @@ $hasFewShipments = (count($arResult['SHIPMENT']) > 1);
 if ($arResult['SHIPMENT_EDIT'])
 {
 	Market\Ui\Assets::loadPlugins([
+		'Ui.ModalForm',
 		'OrderView.BoxSize',
+		'OrderView.BoxSizePackSelect',
 		'OrderView.Box',
 		'OrderView.BoxCollection',
 		'OrderView.Shipment',
 		'OrderView.ShipmentCollection',
-		'OrderView.ShipmentSubmit'
 	]);
 
 	Market\Ui\Assets::loadMessages([
@@ -26,30 +27,22 @@ if ($arResult['SHIPMENT_EDIT'])
 		'T_TRADING_ORDER_VIEW_BOX_SIZE_DENSITY_MORE_MAXIMUM',
 		'T_TRADING_ORDER_VIEW_BOX_SIZE_INPUT_NOT_FOUND',
 		'T_TRADING_ORDER_VIEW_BOX_SIZE_SIZE_MUST_BE_POSITIVE',
+		'T_TRADING_ORDER_VIEW_BOX_PACK_MODAL_ADD',
+		'T_TRADING_ORDER_VIEW_BOX_PACK_MODAL_EDIT',
+		'T_TRADING_ORDER_VIEW_BOX_PACK_EDIT',
+		'T_TRADING_ORDER_VIEW_BOX_PACK_SAVE',
 	]);
 }
 
-if (!empty($arResult['PRINT_DOCUMENTS']))
-{
-	Market\Ui\Assets::loadPlugins([
-		'lib.printdialog',
-		'OrderView.ShipmentPrint',
-	]);
-
-	Market\Ui\Assets::loadMessages([
-		'PRINT_DIALOG_SUBMIT',
-	]);
-}
-
-$baseInputName = 'YAMARKET_SHIPMENT';
+$baseInputName = 'YAMARKET_ORDER[SHIPMENT]';
 $shipmentIndex = 0;
 
 ?>
 <h2 class="yamarket-shipments-title"><?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENTS_TITLE'); ?></h2>
 <div
-	class="yamarket-shipments-layout <?= $arResult['SHIPMENT_EDIT'] ? 'js-plugin' : ''; ?>"
+	class="yamarket-shipments-layout js-yamarket-shipment-collection <?= $arResult['SHIPMENT_EDIT'] ? 'js-yamarket-order__field' : ''; ?>"
 	data-plugin="OrderView.ShipmentCollection"
-	data-base-name="<?= $baseInputName; ?>"
+	data-name="SHIPMENT"
 	id="YAMARKET_SHIPMENT_COLLECTION"
 >
 	<?php
@@ -95,31 +88,22 @@ $shipmentIndex = 0;
 				<?php
 				if ($arResult['SHIPMENT_EDIT'])
 				{
-					$shipmentInputs = [
-						'ID' => $shipment['ID'],
-						'SETUP_ID' => $arResult['SETUP_ID'],
-						'ORDER_ID' => $arResult['ORDER_EXTERNAL_ID'],
-						'ORDER_NUM' => $arResult['ORDER_ACCOUNT_NUMBER'],
-					];
-
-					foreach ($shipmentInputs as $inputName => $inputValue)
-					{
-						?>
-						<input
-							class="js-yamarket-shipment__input"
-							type="hidden" name="<?= $shipmentInputName . '[' . $inputName . ']'; ?>"
-							value="<?= htmlspecialcharsbx($inputValue); ?>"
-							data-name="<?= $inputName; ?>"
-						/>
-						<?php
-					}
+					?>
+					<input
+						class="js-yamarket-shipment__input"
+					   	type="hidden"
+					   	name="<?= $shipmentInputName . '[ID]' ?>"
+					   	value="<?= htmlspecialcharsbx($shipment['ID']) ?>"
+					   	data-name="ID"
+					/>
+					<?php
 				}
 
 				if ($hasFewShipments)
 				{
 					?>
 					<h3 class="yamarket-shipment-title"><?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENT', [ '#ID#' => $shipment['ID'] ]); ?></h3>
-					<?
+					<?php
 				}
 				?>
 				<div class="adm-s-order-table-ddi js-yamarket-shipment__child" data-plugin="OrderView.BoxCollection" data-name="BOX">
@@ -139,49 +123,6 @@ $shipmentIndex = 0;
 						<a href="#" class="yamarket-boxes-add js-yamarket-box__add">
 							+&nbsp;<span class="yamarket-boxes-add__text"><?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENT_BOX_ADD'); ?></span>
 						</a>
-						<?php
-					}
-					?>
-				</div>
-				<div class="yamarket-shipment-submit <?= $isBoxesEmpty ? 'is--hidden' : ''; ?> js-yamarket-shipment__actions">
-					<?php
-					if ($arResult['SHIPMENT_EDIT'])
-					{
-						?>
-						<input
-							class="yamarket-shipment-submit__button adm-btn-green js-plugin-click"
-							type="button"
-							value="<?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENT_SUBMIT'); ?>"
-							data-plugin="OrderView.ShipmentSubmit"
-						/>
-						<?php
-					}
-
-					if (!empty($arResult['PRINT_DOCUMENTS']))
-					{
-						$printItems = Market\Utils::jsonEncode($arResult['PRINT_DOCUMENTS'], JSON_UNESCAPED_UNICODE);
-						$printUrl = Market\Ui\Admin\Path::getModuleUrl('trading_order_print', [
-							'view' => 'dialog',
-							'setup' => $arResult['SETUP_ID'],
-							'id' => $arResult['ORDER_EXTERNAL_ID'],
-							'shipment' => $shipment['ID'],
-						]);
-
-						?>
-						<button
-							class="yamarket-shipment-submit__button yamarket-btn adm-btn adm-btn-menu <?= $arResult['PRINT_READY'] ? '' : 'is--hidden'; ?> js-plugin"
-							type="button"
-							data-plugin="OrderView.ShipmentPrint"
-							data-items="<?= htmlspecialcharsbx($printItems); ?>"
-							data-url="<?= htmlspecialcharsbx($printUrl); ?>"
-						><?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_SHIPMENT_PRINT'); ?></button>
-						<?php
-					}
-
-					if ($arResult['SHIPMENT_EDIT'])
-					{
-						?>
-						<div class="yamarket-shipment-submit__result js-yamarket-shipment-submit__message"></div>
 						<?php
 					}
 					?>

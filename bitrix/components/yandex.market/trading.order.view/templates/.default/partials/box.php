@@ -2,7 +2,7 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) { die(); }
 
 use Bitrix\Main\Localization\Loc;
-use Yandex\Market;
+use Yandex\Market\Ui\UserField\Helper;
 
 /** @var string $boxInputName */
 /** @var int $boxNumber */
@@ -84,11 +84,54 @@ $disabledProperties = $arResult['SHIPMENT_EDIT'] ? [ 'WEIGHT' => true, 'SIZE' =>
 	<?php
 	if ($arResult['SHIPMENT_EDIT'])
 	{
+		$boxPackSelected = false;
+
 		?>
 		<tbody>
 			<tr></tr><?php // hack for bitrix css ?>
 			<tr class="bdb-line js-yamarket-box__child" data-plugin="OrderView.BoxSize" data-name="DIMENSIONS">
 				<td class="tal">
+					<div class="yamarket-box-pack-select">
+						<select class="yamarket-box-pack-select__origin js-yamarket-box-size__pack-select" data-plugin="OrderView.BoxSizePackSelect">
+							<?php
+							foreach ($arResult['BOX_PACKS'] as $boxPack)
+							{
+								$boxPackTitle = sprintf(
+									'%s (%sx%sx%s)',
+									$boxPack['NAME'],
+									$boxPack['WIDTH'],
+									$boxPack['HEIGHT'],
+									$boxPack['DEPTH']
+								);
+								$boxPackAttributes = array_filter([
+									'value' => $boxPack['ID'],
+									'selected' => $boxPack['ID'] === $box['PACK'],
+									'data-width' => $boxPack['WIDTH'],
+									'data-height' => $boxPack['HEIGHT'],
+									'data-depth' => $boxPack['DEPTH'],
+									'data-weight' => $boxPack['WEIGHT'],
+								]);
+
+								if (!empty($boxPackAttributes['selected']))
+								{
+									$boxPackSelected = true;
+								}
+								?>
+								<option <?= Helper\Attributes::stringify($boxPackAttributes); ?>>
+									<?= $boxPackTitle ?>
+								</option>
+								<?php
+							}
+							?>
+							<option value="" <?= $box['PACK'] === null ? 'selected' : '' ?> data-custom="true">
+								<?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_BOX_PACK_CUSTOM'); ?>
+							</option>
+						</select>
+						<button class="yamarket-box-pack-select__save yamarket-transparent-btn js-yamarket-box-pack__save" type="button">
+							<span class="yamarket-<?= $boxPackSelected ? 'edit' : 'save' ?>-icon"></span>
+							<span class="yamarket-transparent-btn__reveal"><?= Loc::getMessage('YANDEX_MARKET_T_TRADING_ORDER_VIEW_BOX_PACK_' . ($boxPackSelected ? 'EDIT' : 'SAVE')); ?></span>
+						</button>
+					</div>
 					<div class="yamarket-box-sizes">
 						<?php
 						foreach ($arResult['BOX_DIMENSIONS'] as $dimensionName => $dimensionDescription)

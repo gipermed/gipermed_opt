@@ -33,42 +33,8 @@
 		$singleSizing = true;
 		$defBoxing = $arSingleBoxing;
 	}
-	
 
 	$freeDelivery = $arResult["PROPERTIES"]["MOSCOW_FREE_DELIVERY"]["VALUE"] ? "data-free-delivery='y'" : "";?>
-
-<!-- очередность вывода:
-1. Новинки
-2. Со скидкой
-3. Уточнить скидку у менеджера
-4. Ни чего не выводим
- -->
-<?php
-
-$sticker = [];
-
- if($arResult['PROPERTIES']['NEW']['VALUE']) {
-	$sticker['class'] = 'new';
-	$sticker['name']  = 'Новинка';
- } elseif($arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE']) {
-	$newPrice =  $arResult['PROPERTIES']['PRICE_WHOLESALE']['VALUE'];
-	$oldPrice =  $arResult['PROPERTIES']['PRICE_WHOLESALE_OLD']['VALUE'];
-	if( $oldPrice && $newPrice < $oldPrice ) {
-		$discount = floor((1 - $newPrice / $oldPrice)* 100);
-		$sticker['class'] 	 = 'sale';
-		$sticker['name'] 	 = 'Скидка';
-		$sticker['discount'] = $discount; 	
-	}
- } elseif ($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']) {
-	$sticker['class'] = 'discount';
-	$sticker['name']  = 'Уточните скидку у менеджера';	 
- } else {
-	$sticker['class'] = 'hide-sticker';
-	$sticker['name']  = '';	
- }
-
-?>
-
 <div class="product-head">
 	<div class="product-head-title">
 		<h1 class="page-title product-title"><?=$arResult["NAME"]?></h1>
@@ -107,6 +73,12 @@ $sticker = [];
 		<div class="product-gallery-main zoom-link">
 			<?$arPrice = $arResult["PRICES"]?>
 			<?$qty = $arResult["PRODUCT"]["QUANTITY"]?>
+			<?if ( $qty && $arPrice["OLD"] && $arPrice["DISCOUNT"] ):?>	
+				<div class="product-item-stikers">
+					<div class="product-item-stiker product-item-stiker-sale">Скидка</div>
+				</div>
+				<div class="product-item-sale"><?=$arPrice["DISCOUNT"]?>%</div>
+				<?endif;?>
 			<div class="product-gallery-slider swiper-container">
 				<div class="swiper-wrapper">
 					<?if (is_array($arResult[ "IMG" ])):?>
@@ -122,15 +94,6 @@ $sticker = [];
 			</div>
 			<svg width="24" height="24" class="zoom-icon"><use xlink:href="#icon-zoom"/></svg>
 		</div>
-	  <?php //if($arResult['PROPERTIES']['ASK_DISCOUNT']['VALUE']): ?>
-		<div class="product-gallery__sticker-container"></div>
-		<div class="product-gallery__sticker <?=$sticker['class']?>">
-			<span><?=$sticker['name']?></span> 
-			 <?php if(isset($sticker['discount'])): ?>
-				<span><?=$sticker['discount']?>%</span>
-			 <?php endif; ?>	
-		</div>
-	  <?php// endif;?>	
 	</div>
 
 	<div class="product-body">
@@ -162,7 +125,7 @@ $sticker = [];
 				<div class="product-form-desc">В ближайшее время наш менеджер свяжется с вами для обсуждения деталей заказа</div>
 			</div>
 			<div class="product-form-buy">
-				<a href="//gipermed.com<?=$arResult["DETAIL_PAGE_URL"]?>" class="product-buy-btn btn btn-full btn-blue" rel="nofollow">Купить в розницу</a>
+				<a href="//gipermed.com<?=$arResult["DETAIL_PAGE_URL"]?>" class="product-buy-btn btn btn-full btn-blue">Купить в розницу</a>
 				<div class="product-form-desc">Переход на сайт для розничных покупателей (физических лиц) www.gipermed.com</div>
 				<div class="product-buy-alert">
 					<img src="/local/templates/.default/img/new/alert-icon.svg" width="24" alt="">
@@ -271,13 +234,7 @@ $sticker = [];
 				</ul>
 				<? endif ?>
 		</div>
-<!--*********-->
-<div style="display: none;">
-<pre>
-<?php var_dump($arResult['PROPERTIES']['PROD_COUNTRY']['USER_TYPE_SETTINGS']['TABLE_NAME']) ?>
-</pre>
-</div>
-<!--*********-->
+
 		<div class="product-info-brand">
 			<? if ( is_array( $arResult[ "MANUFACTURERS" ] ) && count( $arResult[ "MANUFACTURERS" ] ) ): ?>
 				<div class="product-docs-title"><?=GetMessage("CE_DEF_MANUFACTURERS")?>:</div>

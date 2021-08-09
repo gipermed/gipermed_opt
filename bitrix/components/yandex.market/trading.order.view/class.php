@@ -246,6 +246,8 @@ class TradingOrderView extends \CBitrixComponent
 		$this->convertBoxDimensions();
 		$this->resolveShipmentEdit();
 		$this->fillPrintDocuments();
+		$this->fillBoxPacks();
+		$this->resolveBoxSelectedPack();
 	}
 
 	protected function fillCommonData($orderExternalId, $orderNum)
@@ -378,5 +380,52 @@ class TradingOrderView extends \CBitrixComponent
 		}
 
 		$this->arResult['PRINT_DOCUMENTS'] = $documents;
+	}
+
+	protected function fillBoxPacks()
+	{
+		$query = Market\Ui\Trading\Internals\PackTable::getList();
+
+		$this->arResult['BOX_PACKS'] = $query->fetchAll();
+	}
+
+	protected function resolveBoxSelectedPack()
+	{
+		if (empty($this->arResult['SHIPMENT']) || empty($this->arResult['BOX_DIMENSIONS'])) { return; }
+
+		foreach ($this->arResult['SHIPMENT'] as &$shipment)
+		{
+			foreach ($shipment['BOX'] as &$box)
+			{
+				$selectedPack = null;
+
+				foreach ($this->arResult['BOX_PACKS'] as $pack)
+				{
+					$isMatchedPack = true;
+
+					foreach ($this->arResult['BOX_DIMENSIONS'] as $dimensionName => $dimensionDescription)
+					{
+						if ($dimensionName === 'WEIGHT') { continue; }
+						if (!isset($pack[$dimensionName], $box['DIMENSIONS'][$dimensionName])) { continue; }
+
+						if ((int)$pack[$dimensionName] !== (int)$box['DIMENSIONS'][$dimensionName]['VALUE'])
+						{
+							$isMatchedPack = false;
+							break;
+						}
+					}
+
+					if ($isMatchedPack)
+					{
+						$selectedPack = $pack['ID'];
+						break;
+					}
+				}
+
+				$box['PACK'] = $selectedPack;
+			}
+			unset($box);
+		}
+		unset($shipment);
 	}
 }

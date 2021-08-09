@@ -145,7 +145,7 @@ class AdminFormEdit extends \CBitrixComponent
 
 				if (!$this->hasErrors())
 				{
-					$this->redirectAfterSave();
+					$this->afterSave($this->getPostAction());
 				}
 			}
 			else if ($hasSaveRequest)
@@ -171,7 +171,7 @@ class AdminFormEdit extends \CBitrixComponent
 
 	            if ($savePrimary !== null && !$this->hasErrors())
 	            {
-		            $this->redirectAfterSave($savePrimary);
+		            $this->afterSave('save', $savePrimary);
 	            }
             }
 
@@ -192,6 +192,8 @@ class AdminFormEdit extends \CBitrixComponent
 
     protected function initResult()
     {
+        $this->arResult['SUCCESS'] = false;
+        $this->arResult['ACTION'] = null;
         $this->arResult['STEP'] = null;
         $this->arResult['STEP_FINAL'] = false;
         $this->arResult['FIELDS'] = [];
@@ -377,7 +379,7 @@ class AdminFormEdit extends \CBitrixComponent
 
 	protected function getPostAction()
 	{
-		return $this->request->getPost('postAction');
+		return $this->request->get('postAction');
 	}
 
 	protected function processPostAction()
@@ -420,6 +422,11 @@ class AdminFormEdit extends \CBitrixComponent
     protected function hasSaveRequest()
     {
         return ($this->request->getPost('apply') !== null || $this->request->getPost('save') !== null);
+    }
+
+    protected function isAjaxForm()
+    {
+    	return $this->request->getPost('ajaxForm') === 'Y';
     }
 
     protected function getRequestStep()
@@ -482,34 +489,9 @@ class AdminFormEdit extends \CBitrixComponent
     protected function getValueByRequestKey($values, $key, &$result)
     {
         $keyChain = $this->splitFieldNameToChain($key);
+        $value = $this->getValueByChain($values, $keyChain);
 
-        if (!empty($keyChain))
-        {
-            $valuesLevel = $values;
-            $resultLevel = &$result;
-            $keyChainLength = count($keyChain);
-
-            for ($i = 0; $i < $keyChainLength; $i++)
-            {
-				$key = $keyChain[$i];
-                $isLastKey = ($i === $keyChainLength - 1);
-
-                if ($isLastKey)
-                {
-                    $resultLevel[$key] = isset($valuesLevel[$key]) ? $valuesLevel[$key] : null;
-                }
-                else
-                {
-                    if (!isset($resultLevel[$key]))
-                    {
-                        $resultLevel[$key] = [];
-                    }
-
-                    $resultLevel = &$resultLevel[$key];
-                    $valuesLevel = isset($valuesLevel[$key]) ? $valuesLevel[$key] : null;
-                }
-            }
-        }
+        $this->setValueByChain($result, $keyChain, $value);
     }
 
     protected function getFileByRequestKey($post, $files, $key, &$result)
@@ -520,26 +502,24 @@ class AdminFormEdit extends \CBitrixComponent
 	    {
 	    	throw new Main\NotImplementedException();
 	    }
-	    else
+
+        $requestKey = reset($keyChain);
+        $deleteRequestKey = $requestKey . '_del';
+        $oldIdRequestKey = $requestKey . '_old_id';
+
+        $request = isset($files[$requestKey]) && is_array($files[$requestKey]) ? $files[$requestKey] : [];
+
+        if (isset($post[$deleteRequestKey]))
 	    {
-	    	$requestKey = reset($keyChain);
-	    	$deleteRequestKey = $requestKey . '_del';
-	    	$oldIdRequestKey = $requestKey . '_old_id';
-
-	    	$request = isset($files[$requestKey]) && is_array($files[$requestKey]) ? $files[$requestKey] : [];
-
-	    	if (isset($post[$deleteRequestKey]))
-		    {
-			    $request['del'] = ($post[$deleteRequestKey] === 'Y');
-		    }
-
-	    	if (isset($post[$oldIdRequestKey]))
-		    {
-			    $request['old_id'] = (int)$post[$oldIdRequestKey];
-		    }
-
-	    	$result[$requestKey] = $request;
+		    $request['del'] = ($post[$deleteRequestKey] === 'Y');
 	    }
+
+        if (isset($post[$oldIdRequestKey]))
+	    {
+		    $request['old_id'] = (int)$post[$oldIdRequestKey];
+	    }
+
+        $result[$requestKey] = $request;
     }
 
 	protected function resolveDependency(&$fields)
@@ -700,6 +680,20 @@ class AdminFormEdit extends \CBitrixComponent
         return $result;
     }
 
+    protected function afterSave($action, $primary = null)
+    {
+    	if ($this->isAjaxForm())
+	    {
+			$this->arResult['PRIMARY'] = $primary !== null ? $primary : $this->getPrimary();
+			$this->arResult['ACTION'] = $action;
+			$this->arResult['SUCCESS'] = true;
+	    }
+    	else
+	    {
+	    	$this->redirectAfterSave($primary);
+	    }
+    }
+
     protected function getPrimary($useOrigin = false)
     {
 	    $result = null;
@@ -725,7 +719,7 @@ class AdminFormEdit extends \CBitrixComponent
     {
         global $APPLICATION;
 
-        $redirectUrl = '';
+        $redirectUrl = (string)($this->arParams['REDIRECT_URL'] ?: '');
 	    $parameters = [];
 
 	    if ($primary !== null)
@@ -1060,80 +1054,16 @@ class AdminFormEdit extends \CBitrixComponent
 
     protected function getValueByChain($item, $keyChain)
     {
-	    $itemLevel = $item;
-	    $keyChainLength = count($keyChain);
-	    $result = null;
+	    return Market\Utils\Field::getChainValue($item, $keyChain, Market\Utils\Field::GLUE_BRACKET);
+    }
 
-	    for ($i = 0; $i < $keyChainLength; $i++)
-	    {
-		    $key = $keyChain[$i];
-		    $isLastKey = ($i === $keyChainLength - 1);
-
-		    if ($isLastKey)
-		    {
-			    $result = isset($itemLevel[$key]) ? $itemLevel[$key] : null;
-		    }
-		    else
-		    {
-			    $itemLevel = isset($itemLevel[$key]) ? $itemLevel[$key] : null;
-		    }
-	    }
-
-	    return $result;
+    protected function setValueByChain(&$item, $keyChain, $value)
+    {
+	    Market\Utils\Field::setChainValue($item, $keyChain, $value, Market\Utils\Field::GLUE_BRACKET);
     }
 
     protected function splitFieldNameToChain($key)
     {
-        $keyOffset = 0;
-        $keyLength = Market\Data\TextString::getLength($key);
-        $keyChain = [];
-
-        do
-        {
-            $keyPart = null;
-
-            if ($keyOffset === 0)
-            {
-                $arrayEnd = Market\Data\TextString::getPosition($key, '[');
-
-                if ($arrayEnd === false)
-                {
-                    $keyPart = $key;
-                    $keyOffset = $keyLength;
-                }
-                else
-                {
-                    $keyPart = Market\Data\TextString::getSubstring($key, $keyOffset, $arrayEnd - $keyOffset);
-                    $keyOffset = $arrayEnd + 1;
-                }
-            }
-            else
-            {
-				$arrayEnd = Market\Data\TextString::getPosition($key, ']', $keyOffset);
-
-				if ($arrayEnd === false)
-				{
-					$keyPart = Market\Data\TextString::getSubstring($key, $keyOffset);
-                    $keyOffset = $keyLength;
-				}
-				else
-				{
-					$keyPart = Market\Data\TextString::getSubstring($key, $keyOffset, $arrayEnd - $keyOffset);
-                    $keyOffset = $arrayEnd + 2;
-				}
-			}
-
-			if ((string)$keyPart !== '')
-			{
-				$keyChain[] = $keyPart;
-			}
-			else
-			{
-				break;
-			}
-        }
-        while ($keyOffset < $keyLength);
-
-        return $keyChain;
+        return Market\Utils\Field::splitKey($key, Market\Utils\Field::GLUE_BRACKET);
     }
 }
