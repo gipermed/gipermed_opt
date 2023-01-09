@@ -34,8 +34,7 @@
 		$defBoxing = $arSingleBoxing;
 	}
 
-	$freeDelivery = $arResult["PROPERTIES"]["MOSCOW_FREE_DELIVERY"]["VALUE"] ? "data-free-delivery='y'" : "";?>
-<div class="product-head">
+	$freeDelivery = $arResult["PROPERTIES"]["MOSCOW_FREE_DELIVERY"]["VALUE"] ? "data-free-delivery='y'" : "";?><div class="product-head">
 	<div class="product-head-title">
 		<h1 class="page-title product-title"><?=$arResult["NAME"]?></h1>
 		<div class="product-code">Артикул: <?=$arResult["DISPLAY_PROPERTIES"]["ART_NUMBER"]["DISPLAY_VALUE"]?></div>
@@ -125,7 +124,8 @@
 				<div class="product-form-desc">В ближайшее время наш менеджер свяжется с вами для обсуждения деталей заказа</div>
 			</div>
 			<div class="product-form-buy">
-				<a href="//gipermed.com<?=$arResult["DETAIL_PAGE_URL"]?>" class="product-buy-btn btn btn-full btn-blue">Купить в розницу</a>
+				<!--<a href="//gipermed.com<?=$arResult["DETAIL_PAGE_URL"]?>" class="product-buy-btn btn btn-full btn-blue">Купить в розницу</a>-->
+				<a href="//new.gipermed.com" class="product-buy-btn btn btn-full btn-blue">Купить в розницу</a>
 				<div class="product-form-desc">Переход на сайт для розничных покупателей (физических лиц) www.gipermed.com</div>
 				<div class="product-buy-alert">
 					<img src="/local/templates/.default/img/new/alert-icon.svg" width="24" alt="">
@@ -330,7 +330,7 @@
 								<span>Самовывоз</span>
 							</div>
 							<div class="content-text">
-								Вы можете самостоятельно забрать товар со склада по адресу:<br> <b>г. Москва, ул. Рябиновая, д. 53, стр. 2.</b> <br>
+								Вы можете самостоятельно забрать товар со склада по адресу:<br> <b>г. Москва, ул. Рябиновая, д. 37, стр. 1.</b> <br>
 								Услуга бесплатна для всех клиентов.
 							</div>
 						</div>
@@ -457,4 +457,4 @@
 		}
 	}
 </script>
-<? $this->EndViewTarget(); 
+<? $this->EndViewTarget();

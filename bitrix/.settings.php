@@ -68,4 +68,19 @@ return array (
     ),
     'readonly' => true,
   ),
+
+'cache' => array(
+      'value' => array(
+          'type' => array(
+              'class_name' => '\\Bitrix\\Main\\Data\\CacheEngineMemcache',
+              'extension' => 'memcache'
+          ),
+          'memcache' => array(
+              'host' => '213.139.208.32',
+              'port' => '34657',
+          ),
+          'sid' => $_SERVER["DOCUMENT_ROOT"]."#01"
+      ),
+  ),
+
 );

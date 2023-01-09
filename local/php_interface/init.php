@@ -6,7 +6,7 @@ define('DEFAULT_SITE_ID', 's1');
 define('ROOT_SECTION_ID', 753);
 define('ALT_SECTION_ID', 631);
 
-include_once 'lib/signer.php';
+//include_once 'lib/signer.php';
 
 function cache( $id, $ttl, $path, $tag, $func, $params = [] ) {
 	$cache = \Bitrix\Main\Data\Cache::createInstance();
@@ -596,6 +596,97 @@ function getValFromHLB($hlbName, $code, $col = 'UF_NAME') {
 					return $record[$col];
 				}
 			}
+		}
+	}
+}
+
+$eventManager = \Bitrix\Main\EventManager::getInstance();
+
+$eventManager->addEventHandlerCompatible('search', 'BeforeIndex',    ['\\CatalogProductIndexer','handleBeforeIndex']);
+
+
+class CatalogProductIndexer
+{
+  /**
+   * @var int Идентификатор инфоблока каталога 
+   */
+  const IBLOCK_ID = '1';
+
+  /**
+   * Дополняет индексируемый массив нужными значениями
+   * подписан на событие BeforeIndex модуля search
+   * @param array $arFields 
+   * @return array
+   */
+  public static function handleBeforeIndex( $arFields = [] )
+  {
+    if ( !static::isInetesting( $arFields ) )
+    {
+      return $arFields;
+    }
+
+    /**
+     * @var array Массив полей элемента, которые нас интересуют
+     */
+    $arSelect = [
+      'ID',
+      'IBLOCK_ID',
+      'PROPERTY_ART_NUMBER'
+    ];
+
+    /**
+     * @var CIblockResult Массив описывающий индексируемый элемент
+     */
+    $resElements = \CIBlockElement::getList(
+      [],
+      [
+        'IBLOCK_ID' => $arFields['PARAM2'],
+        'ID'        => $arFields['ITEM_ID']
+      ],
+      false,
+      [
+        'nTopCount'=>1
+      ],
+      $arSelect
+    );
+
+    /**
+     * В случае, если элемент найден мы добавляем нужные поля 
+     * в соответсвующие столбцы поиска
+     */
+    if ( $arElement = $resElements->fetch() )
+    {
+      $arFields['TITLE'] .= ' '.$arElement['PROPERTY_ART_NUMBER_VALUE'];
+    }
+
+    return $arFields;
+  }
+
+  /**
+   * Возвращает true, если это интересующий нас элемент
+   * @param array $fields 
+   * @return boolean
+   */
+  public static function isInetesting( $fields = [] )
+  {
+    return ( $fields["MODULE_ID"] == "iblock" && $fields['PARAM2'] == static::IBLOCK_ID );
+  }
+
+}
+
+if (!function_exists('custom_mail') && COption::GetOptionString("webprostor.smtp", "USE_MODULE") == "Y")
+{
+	function custom_mail($to, $subject, $message, $additional_headers='', $additional_parameters='')
+	{
+		if(CModule::IncludeModule("webprostor.smtp"))
+		{
+			$smtp = new CWebprostorSmtp("s1");
+			$result = $smtp->SendMail($to, $subject, $message, $additional_headers, $additional_parameters);
+
+			if($result)
+				return true;
+			else
+				return false;
 		}
 	}
 }

@@ -28,7 +28,7 @@ class CIblockImport extends CBitrixComponent {
 //		$external = file_get_contents( $url,false,$context );
 //		$external = unserialize($external);
 		//var_dump($external);
-
+		//echo"php";
 
 		$curl_handle=curl_init();
 		curl_setopt($curl_handle, CURLOPT_URL, $url);

@@ -1,4 +1,4 @@
-.cookalert {padding: 15px 20px; font-size: 12px; background: #999; margin: 0 auto; font-weight: bold; color: #fff;}
+.cookalert {position: relative; padding: 15px 20px; font-size: 12px; background: #999; margin: 0 auto; font-weight: bold; color: #fff; z-index: 15;}
 .cookalert__msg {text-align: center;}
 .cookalert__inner {width: 100%; background: #999;}
 

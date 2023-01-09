@@ -145,3 +145,5 @@ Allow: /upload/*.jpg
 Allow: /upload/*.jpeg
 Allow: /upload/*.ico
 Sitemap: https://gipermed.ru/sitemap.xml
+
+Sitemap: https://gipermed.ru/css/main/biu/sitemap.xml
