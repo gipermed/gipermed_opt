@@ -38,12 +38,14 @@ $this->setFrameMode(true);
 				/>
 		<?endforeach?>
 
-		<? //prices ?>
-		<? foreach($arResult["ITEMS"] as $key=>$arItem): ?>
-			<? if ( !isset( $arItem["PRICE"] ) )  continue; ?>
-			<? if ( $arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0 )	continue; ?>
-			<? $key = $arItem["ENCODED_ID"]; ?>
 
+		<? //prices retail only ?>
+		
+		<?// foreach($arResult["ITEMS"] as $key=>$arItem): ?>
+			<? //if ( !isset( $arItem["PRICE"] ) )  continue; ?>
+			<? //if ( $arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0 )	continue; ?>
+			<? //$key = $arItem["ENCODED_ID"]; ?>
+ 			<!--
 			<div class="category-filter-section">
 				<div class="content-title"><?=$arItem["NAME"]?>, ₽</div>
 				<div class="range-slider-wrapp">
@@ -86,6 +88,67 @@ $this->setFrameMode(true);
 					</div>
 				</div>
 			</div>
+			-->
+		<?//endforeach ?>
+
+		<?php // wholesale price  ?>
+		<? foreach($arResult["ITEMS"] as $key=>$arItem): ?>
+			<?php if($arItem["CODE"] == "PRICE_WHOLESALE"): ?>
+
+					<? if ( $arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0 )	continue; ?>
+					<? $key = $arItem["ENCODED_ID"]; ?>
+					<?php
+					 $minValue = isset($arItem['VALUES']['MIN']['HTML_VALUE']) ? $arItem['VALUES']['MIN']['HTML_VALUE'] : $arItem["VALUES"]["MIN"]["VALUE"];
+					 $maxValue = isset($arItem['VALUES']['MAX']['HTML_VALUE']) ? $arItem['VALUES']['MAX']['HTML_VALUE'] : $arItem["VALUES"]["MAX"]["VALUE"];
+					 $minValue = round($minValue, 2);
+					 $maxValue = round($maxValue, 2);
+					 ?>
+
+					<div class="category-filter-section">
+						<div class="content-title"><?=$arItem["NAME"]?>, ₽</div>
+						<div class="range-slider-wrapp">
+							<ul class="range-inputs">
+								<li>
+									<label class="form-block">
+										<span class="range-input-title">От</span>
+										<input
+											class="min-price input input-small range-input range-input-from"
+											type="text"
+											name="<?echo $arItem["VALUES"]["MIN"]["CONTROL_NAME"]?>"
+											id="<?echo $arItem["VALUES"]["MIN"]["CONTROL_ID"]?>"
+											value="<?= $minValue ?>"
+											onkeyup="smartFilter.keyup(this)"
+											oninput="console.log(this)"
+											placeholder="<?=GetMessage("CT_BCSF_FILTER_FROM")?>"
+											/>
+									</label>
+								</li>
+								<li>
+									<label class="form-block">
+										<span class="range-input-title">до</span>
+										<input
+										class="max-price input input-small range-input range-input-to"
+										type="text"
+										name="<?echo $arItem["VALUES"]["MAX"]["CONTROL_NAME"]?>"
+										id="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>"
+										value="<?= $maxValue?>"
+										onkeyup="smartFilter.keyup(this)"
+										oninput="smartFilter.keyup(this)"
+										placeholder="<?=GetMessage("CT_BCSF_FILTER_TO")?>"
+										/>
+									</label>
+								</li>
+							</ul>
+							<?php $steps =round(($maxValue - $minValue) / 100);?>
+							<div class="range-slider" data-min="<?= $arItem["VALUES"]["MIN"]["VALUE"]?>" data-max="<?=$arItem["VALUES"]["MAX"]["VALUE"]?>" data-value-from="<?= $arItem["VALUES"]["MIN"]["VALUE"]?>" data-value-to="<?=$arItem["VALUES"]["MAX"]["VALUE"]?>" data-step="<?= $steps ?>">
+								<div class="range-slider-info range-slider-from"><?= round($arItem["VALUES"]["MIN"]["VALUE"], 2)?></div>
+								<div class="range-slider-info range-slider-center"><?=round(($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"]) /2 )?></div>
+								<div class="range-slider-info range-slider-to"><?= round($arItem["VALUES"]["MAX"]["VALUE"], 2)?></div>
+							</div>
+						</div>
+					</div>
+
+			<?php endif; ?>
 		<?endforeach ?>
 
 		<? //not prices ?>

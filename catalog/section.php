@@ -164,7 +164,7 @@
 		</div>
 	</aside>
 	<div class="category-body">
-		<?$arSort = $APPLICATION->IncludeComponent(
+		<?/*$arSort = $APPLICATION->IncludeComponent(
 				"gipermed:catalog.sort.panel",
 				"new",
 				array(
@@ -184,7 +184,7 @@
 					"SHOW_BY" => array( 24, 36, 52 )
 				),
 				false
-			);?>
+			);*/?>
 
 		<?  if ( unpublishedProductsMustBeHidden() ) $GLOBALS[ "arrFilter" ][ "!PROPERTY_PUBLISH" ] = false; ?>
 		<? $GLOBALS["arrFilter"]["!PROPERTY_PUBLISH_RETAIL"] = false;?>

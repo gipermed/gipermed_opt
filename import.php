@@ -8,6 +8,7 @@ define(«NOT_CHECK_PERMISSIONS», true);
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 set_time_limit(0);
+//echo"php";
 
 $APPLICATION->IncludeComponent(
 	"gipermed:iblock.import",
@@ -15,9 +16,10 @@ $APPLICATION->IncludeComponent(
 	array(
 		"IBLOCK_ID" => 4,
 		"CACHE_TIME" => 86400,
-		"URL" => "http://gipermed.info",
+		"URL" => "https://gipermed.info",
 		"FULL_UPDATE" => "N"
 	)
 );
+//echo"php";
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");

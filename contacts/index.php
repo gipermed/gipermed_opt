@@ -22,14 +22,14 @@ $APPLICATION->SetTitle("Контакты");
 				<div class="contacts-section">
 					<div class="section-title">Складской комплекс ЦТМТ «Гипермед»</div>
 					<div class="content-text">
-						<p><b>Адрес: г. Москва, ул. Рябиновая, д. 53, стр. 2<br> Индустриально-складское пространство Р-53</b><br>
+						<p><b>Адрес: г. Москва, ул. Рябиновая, д. 37, стр. 1<br></b><br>
 						GPS координаты склада:<br>
-						широта - <b>55.693662</b>,<br>
-						долгота - <b>37.428953</b>
+						широта - <b>55.704144</b>,<br>
+						долгота - <b>37.424174</b>
 						<p>Режим работы: с <b>8:00</b> до <b>17:00</b><br>
 						Тел.: <a href="tel:84951184257"><b>8 495 118-42-57</b></a><br>
 						Тел.: <a href="tel:"><b>8 917 569-92-17</b></a><br>
-						Руководитель складского комплекса: Антон Валерьевич  
+						Контактное лицо (зав. склада): Юлия Теплова
 					</div>
 				</div>
 			</div>
@@ -46,20 +46,20 @@ $APPLICATION->SetTitle("Контакты");
 			<div class="contacts-col flex-row-item">
 				<div class="content-title content-title-inline">
 					<span>Доступ на территорию склада</span>
-					<a href="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?>" class="btn print-img-btn hidden-tablet">
+					<a href="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?>" class="btn print-img-btn hidden-tablet">
 						<svg width="18" height="17"><use xlink:href="#icon-print"/></svg>
 						<span>Распечатать схему</span>
 					</a>
 				</div>
-				<a href="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?>" class="contacts-schema zoom-link" data-fancybox="image">
-					<img src="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?>" srcset="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?> 1x,<?= $APPLICATION->GetTemplatePath("img/contacts-schema@2x.jpg"); ?> 2x" alt="">
+				<a href="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?>" class="contacts-schema zoom-link" data-fancybox="image">
+					<img src="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?>" srcset="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?> 1x,<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new@2x.jpg"); ?> 2x" alt="">
 					<svg width="24" height="24" class="zoom-icon"><use xlink:href="#icon-zoom"/></svg>
 				</a>
 				<div class="contacts-schema-desc hidden-tablet">* Схема разработана для печати на листе формата А4</div>
 			</div>
 			<div class="contacts-col flex-row-item">
 				<div class="content-title contacts-map-title">Склад на карте</div>
-				<div class="contacts-map" data-lat="55.693662" data-lng="37.428953" data-zoom="14" data-address="г. Москва, ул. Рябиновая, д. 53, стр. 2" data-caption="Рябиновая улица 53с2"></div>
+				<div class="contacts-map" data-lat="55.704144" data-lng="37.424174" data-zoom="14" data-address="г. Москва, ул. Рябиновая, д. 37, стр. 1" data-caption="Рябиновая улица 37с1"></div>
 				<a href="#" class="contacts-map-read-more read-more-link">
 					<span>Посмотреть</span>
 					<svg width="20" height="15"><use xlink:href="#icon-arrow-right"/></svg>
@@ -75,14 +75,14 @@ $APPLICATION->SetTitle("Контакты");
 				<svg width="14" height="14"><use xlink:href="#icon-close"/></svg>
 			</a>
 			<div class="modal-contacts-schema-title">Схема проезда на склад</div>
-			<a href="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?>" class="btn print-img-btn hidden-tablet">
+			<a href="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?>" class="btn print-img-btn hidden-tablet">
 				<svg width="18" height="17"><use xlink:href="#icon-print"/></svg>
 				<span>Распечатать схему</span>
 			</a>
 			<div class="modal-contacts-schema-desc hidden-tablet">Схема разработана для печати на<br> листе формата А4</div>
 		</div>
 		<div class="modal-contacts-schema-img">
-			<img src="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?>" srcset="<?= $APPLICATION->GetTemplatePath("img/contacts-schema.jpg"); ?> 1x,<?= $APPLICATION->GetTemplatePath("img/contacts-schema@2x.jpg"); ?> 2x" alt="">
+			<img src="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?>" srcset="<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new.jpg"); ?> 1x,<?= $APPLICATION->GetTemplatePath("img/contacts-schema-new@2x.jpg"); ?> 2x" alt="">
 		</div>
 	</div>
 </div>
