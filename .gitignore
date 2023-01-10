@@ -12,10 +12,10 @@ logs/
 *.swp
 *.xml
 local/vendor/*
+css/*
 local/composer.lock
 local/const.php
 
-!bitrix/.settings.php
 !bitrix/components/
 
 bitrix/components/bitrix/*
