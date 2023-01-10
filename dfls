@@ -1,0 +1,91 @@
+[33mcommit fe857c592b3c1cb64a14878f4cfe53649ee8dbb4[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Server <302719@mail.ru>
+Date:   Tue Jan 10 12:33:55 2023 +0300
+
+    first all
+
+[33mcommit 3ca9d5aa03d76d50f3ed2d77abf066b8bc56903a[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mfeature/19564.smartFilter[m[33m)[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Mon Aug 9 18:40:44 2021 +0300
+
+    installed yandex plugin, and few ceo remarks, also fixed urlrewrite
+
+[33mcommit fbf44f907662962f71b8542c59ab519173d68e71[m
+Merge: 782f3f6 4abd0da
+Author: Александр Панфилов <caof192@gmail.com>
+Date:   Thu Apr 29 13:16:25 2021 +0000
+
+    Merge branch 'feature/18274.discountSticker' into 'master'
+    
+    removed ask about discount label from news lists
+    
+    See merge request palladiumlab-group/gipermed-ru!5
+
+[33mcommit 4abd0da6a078722ce8c9c40425afca64d7631813[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Thu Apr 29 16:13:22 2021 +0300
+
+    removed ask about discount label from news lists
+
+[33mcommit 782f3f6f5304f3bd5e41c7466866e92fd82a6d1d[m
+Merge: 73d393f fddc90c
+Author: Александр Панфилов <caof192@gmail.com>
+Date:   Tue Apr 27 15:11:59 2021 +0000
+
+    Merge branch 'feature/18274.discountSticker' into 'master'
+    
+    also revised  old version catalog element template
+    
+    See merge request palladiumlab-group/gipermed-ru!4
+
+[33mcommit fddc90ca2a134dd629304496188ca45a3b74cfa0[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Tue Apr 27 17:35:17 2021 +0300
+
+    also revised  old version catalog element template
+
+[33mcommit 73d393fc2067a3dd0062e6c1de818f4e09fd1063[m
+Merge: b09de2c 95425cc
+Author: Александр Панфилов <caof192@gmail.com>
+Date:   Mon Apr 26 12:25:54 2021 +0000
+
+    Merge branch 'feature/18274.discountSticker' into 'master'
+    
+    also have been added 2 more stickers
+    
+    See merge request palladiumlab-group/gipermed-ru!3
+
+[33mcommit 95425ccb8129ea706379bc8aad9f8fe4ff8bfd57[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Mon Apr 26 15:18:02 2021 +0300
+
+    also have been added 2 more stickers
+
+[33mcommit b09de2c9ada5d6214d5a8e072d21dad0cb117407[m
+Merge: cb568cc 61bfba1
+Author: Александр Панфилов <caof192@gmail.com>
+Date:   Mon Apr 26 09:31:44 2021 +0000
+
+    Merge branch 'feature/18274.discountSticker' into 'master'
+    
+    Feature/18274.discount sticker
+    
+    See merge request palladiumlab-group/gipermed-ru!2
+
+[33mcommit 61bfba13a725e5d83c133e1a6c937d9ed3406c00[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Mon Apr 26 12:25:13 2021 +0300
+
+    moved styles to css file
+
+[33mcommit 0bff51fe62535e1bedede86a9b874ff2b60d327d[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Mon Apr 26 11:28:03 2021 +0300
+
+    added new infoblock option and sticker
+
+[33mcommit cb568cc6c43117e0586ec960d6a7fb770caff693[m
+Author: Palladiumlab <help@palladiumlab.com>
+Date:   Fri Apr 23 17:30:47 2021 +0300
+
+    Init site
