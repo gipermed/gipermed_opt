@@ -6,19 +6,18 @@ sync_exclude
 .env
 bitrix/*
 upload/*
+crl/*
 logs/
 
 *.log
 *.swp
 *.xml
 local/vendor/*
+local/php_interface/*
 css/*
 local/composer.lock
 local/const.php
 
-!bitrix/components/
-
-bitrix/components/bitrix/*
 local/modules/sprint.migration/*
 local/templates/main/node_modules/
 local/templates/main/package-lock.json
