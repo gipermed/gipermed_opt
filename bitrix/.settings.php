@@ -52,7 +52,7 @@ return array (
       array (
         'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
         'host' => 'localhost',
-        'database' => 'opt_test',
+        'database' => 'gipermum_optrst4',
         'login' => 'gipermum_optrst4',
         'password' => 'o5DxQmY%',
         'options' => 2,
@@ -69,22 +69,18 @@ return array (
     'readonly' => true,
   ),
 
-'cache' =>
-  array (
-    'value' =>
-    array (
-      'type' =>
-      array (
-        'class_name' => '\\Bitrix\\Main\\Data\\CacheEngineMemcache',
-        'extension' => 'memcache',
+'cache' => array(
+      'value' => array(
+          'type' => array(
+              'class_name' => '\\Bitrix\\Main\\Data\\CacheEngineMemcache',
+              'extension' => 'memcache'
+          ),
+          'memcache' => array(
+              'host' => '213.139.208.32',
+              'port' => '34657',
+          ),
+          'sid' => $_SERVER["DOCUMENT_ROOT"]."#01"
       ),
-      'memcache' =>
-      array (
-        'host' => 'unix:///var/run/memcached/memcached.sock',
-        'port' => '0',
-      ),
-//      'sid' => '/home/g/gipermum/new.gipermed.com/public_html#01',
-    ),
   ),
 
 );
