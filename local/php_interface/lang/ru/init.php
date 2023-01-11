@@ -1,6 +1,0 @@
-<?
-$MESS["CATALOG_ICON_PROP_NEW"] = "Новинка";
-$MESS["CATALOG_ICON_PROP_SALE"] = "Распродажа";
-$MESS["CATALOG_ICON_PROP_STOCK"] = "Акция";
-$MESS["CATALOG_ICON_PROP_REJECT"] = "Скидка";
-$MESS["CATALOG_ICON_PROP_PROD_OF_MONTH"] = "Товар месяца";
